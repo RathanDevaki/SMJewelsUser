@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/animation_view"
+            android:layout_width="164dp"
+            android:layout_height="164dp"
+            android:layout_centerInParent="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/waiting" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Application Submitted"
+            android:layout_above="@id/animation_view"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="16dp"
+            android:textSize="16sp"
+            android:fontFamily="@font/montserrat_bold"
+            android:textColor="@color/colorPrimary"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/animation_view"
+            android:text="@string/application_pending_message"
+            android:textAlignment="center"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:textColor="@color/colorBlack"
+            android:textSize="14sp"/>
+
+    </RelativeLayout>
+
+</layout>

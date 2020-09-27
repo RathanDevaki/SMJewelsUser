@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Sign Up"
+                android:textColor="@color/colorPrimary"
+                android:textSize="36sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="Happy to see you saving."
+                android:textColor="@color/colorBlack"
+                android:textSize="14sp" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorWhite">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="128dp"
+                        android:layout_height="128dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="36dp"
+                        android:src="@drawable/ic_account_circle"
+                        android:id="@+id/userPhotoCreateAccount"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Click to add photo"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="4dp"
+                        android:textSize="12sp"/>
+
+                    <EditText
+                        android:id="@+id/userNameSignUp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="36dp"
+                        android:layout_marginEnd="24dp"
+                        android:textSize="14sp"
+                        android:background="@drawable/edittext_grey_border"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:hint="Name"
+                        android:inputType="textPersonName"
+                        android:padding="16dp"
+                        android:textColor="@color/colorBlack" />
+
+                    <EditText
+                        android:id="@+id/userPhoneSignUp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="24dp"
+                        android:background="@drawable/edittext_grey_border"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:hint="Phone Number"
+                        android:textSize="14sp"
+                        android:maxLength="10"
+                        android:inputType="phone"
+                        android:padding="16dp"
+                        android:textColor="@color/colorBlack" />
+
+                    <EditText
+                        android:id="@+id/userEmailSignUp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="24dp"
+                        android:background="@drawable/edittext_grey_border"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:hint="Email ID"
+                        android:textSize="14sp"
+                        android:inputType="textEmailAddress"
+                        android:padding="16dp"
+                        android:textColor="@color/colorBlack" />
+
+                    <EditText
+                        android:id="@+id/userAddressSignUp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="24dp"
+                        android:background="@drawable/edittext_grey_border"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:hint="Address"
+                        android:textSize="14sp"
+                        android:inputType="textPostalAddress"
+                        android:padding="16dp"
+                        android:textColor="@color/colorBlack" />
+
+                    <EditText
+                        android:id="@+id/userPincodeSignUp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="24dp"
+                        android:background="@drawable/edittext_grey_border"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:hint="Pin Code"
+                        android:textSize="14sp"
+                        android:maxLength="6"
+                        android:inputType="number"
+                        android:padding="16dp"
+                        android:textColor="@color/colorBlack" />
+
+                    <EditText
+                        android:id="@+id/userDOBSignUp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="24dp"
+                        android:background="@drawable/edittext_grey_border"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:hint="Date of Birth"
+                        android:textSize="14sp"
+                        android:padding="16dp"
+                        android:textColor="@color/colorBlack" />
+
+                    <EditText
+                        android:id="@+id/userPANSignUp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="24dp"
+                        android:background="@drawable/edittext_grey_border"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:hint="PAN Number"
+                        android:textSize="14sp"
+                        android:maxLength="10"
+                        android:padding="16dp"
+                        android:textColor="@color/colorBlack" />
+
+                    <EditText
+                        android:id="@+id/userAadharSignUp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="24dp"
+                        android:background="@drawable/edittext_grey_border"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:hint="Aadhar Number"
+                        android:textSize="14sp"
+                        android:maxLength="12"
+                        android:inputType="number"
+                        android:padding="16dp"
+                        android:textColor="@color/colorBlack" />
+
+                    <EditText
+                        android:id="@+id/userNomineeSignUp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="24dp"
+                        android:background="@drawable/edittext_grey_border"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:hint="Nominee (Optional)"
+                        android:textSize="14sp"
+                        android:inputType="text"
+                        android:padding="16dp"
+                        android:textColor="@color/colorBlack" />
+
+                    <EditText
+                        android:id="@+id/userNomineeRelationshipSignUp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="24dp"
+                        android:background="@drawable/edittext_grey_border"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:hint="Nominee Relationship (Optional)"
+                        android:textSize="14sp"
+                        android:inputType="text"
+                        android:padding="16dp"
+                        android:textColor="@color/colorBlack" />
+
+                    <EditText
+                        android:id="@+id/userNomineePhoneSignUp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="24dp"
+                        android:background="@drawable/edittext_grey_border"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:hint="Nominee Phone (Optional)"
+                        android:textSize="14sp"
+                        android:inputType="number"
+                        android:maxLength="10"
+                        android:padding="16dp"
+                        android:textColor="@color/colorBlack" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginTop="16dp">
+
+                        <Spinner
+                            android:id="@+id/plan_spinner"
+                            android:layout_width="0dp"
+                            android:background="@color/greyLight"
+                            android:padding="12dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"/>
+
+                        <ImageView
+                            android:id="@+id/plan_info"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_spinner_blue"
+                            android:layout_marginStart="12dp"/>
+
+
+                    </LinearLayout>
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Sign Up"
+                        android:textAllCaps="false"
+                        android:background="@drawable/button_rounded_corners_blue"
+                        android:textSize="16sp"
+                        android:textColor="@color/colorWhite"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:id="@+id/signUpBtn"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginEnd="24dp"/>
+
+                </LinearLayout>
+
+
+
+            </ScrollView>
+
+        </LinearLayout>
+
+        <include layout="@layout/plan_info_bottom_sheet"
+            android:id="@+id/plan_info_sheet"/>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+
+</layout>

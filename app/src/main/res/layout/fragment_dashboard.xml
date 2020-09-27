@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:fitsSystemWindows="true">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fitsSystemWindows="true"
+                app:contentScrim="@color/colorPrimary"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/dashboard_background" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/user_photo_dashboard"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_margin="24dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_below="@id/user_photo_dashboard"
+                        android:layout_marginTop="4dp"
+                        android:text="Loading..."
+                        android:textSize="24sp"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:textColor="@color/colorWhite"
+                        android:id="@+id/user_name_dashboard"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_below="@id/user_name_dashboard"
+                        android:layout_marginTop="4dp"
+                        android:text="Welcome Back"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="24dp"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:textColor="@color/colorWhite" />
+
+                </RelativeLayout>
+
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="Your Transactions"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="16sp" />
+
+                <ListView
+                    android:id="@+id/transactions_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="16dp"
+                    android:divider="@null"
+                    android:nestedScrollingEnabled="true"
+                    android:scrollbars="none" />
+
+
+
+
+
+            </LinearLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

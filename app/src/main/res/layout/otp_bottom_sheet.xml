@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/bottom_sheet_otp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:behavior_peekHeight="0dp"
+        app:behavior_hideable="true"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/ic_sms" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="OTP Sent"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/otp_message_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="@string/otp_message"
+                android:textAlignment="center"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/otp_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="24dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:textColor="@color/colorBlack"
+                android:background="@drawable/edittext_grey_border"
+                android:padding="12dp"
+                android:hint="Enter OTP"
+                android:textAlignment="center"
+                android:fontFamily="@font/montserrat_medium"
+                android:maxLength="6"/>
+
+            <Button
+                android:id="@+id/verify_otp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/button_rounded_corners_blue"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Verify OTP"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</layout>
