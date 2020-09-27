@@ -15,12 +15,15 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.StorageReference;
 import com.nguyenhoanglam.imagepicker.model.Config;
 import com.nguyenhoanglam.imagepicker.ui.imagepicker.ImagePicker;
+
+import java.util.HashMap;
 
 import es.dmoral.toasty.Toasty;
 import in.savitar.smjewelsuser.R;
@@ -73,7 +76,7 @@ public class CreateAccountFragment extends Fragment implements SplashContract.Vi
         //Setting up of plan Spinner
         mBinding.planSpinner.setOnItemSelectedListener(this);
         //Creating the ArrayAdapter instance having the country list
-        String[] plans = {"Plan A", "Plan B","Plan C"};
+        String[] plans = {"PlanA", "PlanB","PlanC"};
         ArrayAdapter aa = new ArrayAdapter(getContext(),android.R.layout.simple_spinner_item,plans);
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //Setting the ArrayAdapter data on the Spinner
@@ -152,15 +155,34 @@ public class CreateAccountFragment extends Fragment implements SplashContract.Vi
             Toasty.success(getContext(),"Enter DOB").show();
         } else {
             uploadData();
-            Toasty.success(getContext(),"Created Successfully").show();
-            NavigationUtil.INSTANCE.toMainActivity();
         }
 
     }
 
     private void uploadData() {
 
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference().child("ApprovalList");
+        HashMap<String,String> usersMap = new HashMap<>();
+        usersMap.put("Name",mBinding.userNameSignUp.getText().toString());
+        usersMap.put("Phone",mBinding.userPhoneSignUp.getText().toString());
+        usersMap.put("EmailID",mBinding.userEmailSignUp.getText().toString());
+        usersMap.put("Address",mBinding.userAddressSignUp.getText().toString());
+        usersMap.put("PinCode",mBinding.userPincodeSignUp.getText().toString());
+        usersMap.put("DOB",mBinding.userDOBSignUp.getText().toString());
+        usersMap.put("PAN",mBinding.userPANSignUp.getText().toString());
+        usersMap.put("Aadhar",mBinding.userAadharSignUp.getText().toString());
+        usersMap.put("Nominee",mBinding.userNomineeSignUp.getText().toString());
+        usersMap.put("NomineeRelationship",mBinding.userNomineeRelationshipSignUp.getText().toString());
+        usersMap.put("NomineePhone",mBinding.userNomineePhoneSignUp.getText().toString());
+        usersMap.put("Plan",mBinding.planSpinner.getSelectedItem().toString());
+        databaseReference.push().setValue(usersMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Toasty.success(getContext(),"Sign Up Completed Successfully").show();
+                NavigationUtil.INSTANCE.toPendingStatus();
+            }
+        });
 
     }
 

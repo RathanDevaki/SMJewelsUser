@@ -24,8 +24,9 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="175dp"
                     android:scaleType="fitXY"
+                    app:layout_collapseMode="parallax"
                     android:src="@drawable/dashboard_background" />
 
                 <RelativeLayout
@@ -40,28 +41,28 @@
                         android:layout_margin="24dp" />
 
                     <TextView
+                        android:id="@+id/user_name_dashboard"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
                         android:layout_below="@id/user_photo_dashboard"
+                        android:layout_marginStart="16dp"
                         android:layout_marginTop="4dp"
-                        android:text="Loading..."
-                        android:textSize="24sp"
                         android:fontFamily="@font/montserrat_bold"
+                        android:text="Loading..."
                         android:textColor="@color/colorWhite"
-                        android:id="@+id/user_name_dashboard"/>
+                        android:textSize="24sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
                         android:layout_below="@id/user_name_dashboard"
+                        android:layout_marginStart="16dp"
                         android:layout_marginTop="4dp"
-                        android:text="Welcome Back"
-                        android:textSize="16sp"
                         android:layout_marginBottom="24dp"
                         android:fontFamily="@font/montserrat_medium"
-                        android:textColor="@color/colorWhite" />
+                        android:text="Welcome Back"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="16sp" />
 
                 </RelativeLayout>
 
@@ -73,19 +74,117 @@
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:fillViewport="true"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:padding="16dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="Your Plan"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="16sp" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="12dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="20dp">
+
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/montserrat_bold"
+                                    android:text="Silver Saving"
+                                    android:id="@+id/plan_name_progress"
+                                    android:textColor="@color/colorPrimary"
+                                    android:textSize="16sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/montserrat_medium"
+                                    android:text="Plan Description in 2 lines"
+                                    android:layout_below="@id/plan_name_progress"
+                                    android:id="@+id/plan_desc_progress"
+                                    android:textSize="12sp" />
+
+                            </LinearLayout>
+
+                            <ImageView
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
+                                android:layout_marginStart="12dp"
+                                android:layout_alignParentEnd="true"
+                                android:src="@drawable/gold"/>
+
+
+                        </LinearLayout>
+
+                        <ProgressBar
+                            android:id="@+id/plan_progress"
+                            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="10dp"
+                            android:layout_marginBottom="4dp"
+                            android:layout_marginTop="8dp"
+                            android:progressDrawable="@drawable/gradient_progress"
+                            tools:progress="70" />
+
+                        <TextView
+                            android:id="@+id/progress_percentage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:text="24% Completed"
+                            android:textSize="12sp" />
+
+
+
+
+
+
+
+
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
                     android:fontFamily="@font/montserrat_bold"
                     android:text="Your Transactions"
                     android:textColor="@color/colorBlack"
@@ -99,10 +198,6 @@
                     android:divider="@null"
                     android:nestedScrollingEnabled="true"
                     android:scrollbars="none" />
-
-
-
-
 
             </LinearLayout>
 
