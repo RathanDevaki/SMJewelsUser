@@ -14,7 +14,6 @@ public interface SplashContract {
         boolean checkLogin();
         void showDialog(Context context);
         void hideDialog();
-
     }
 
 
