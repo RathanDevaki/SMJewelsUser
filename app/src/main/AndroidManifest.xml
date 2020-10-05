@@ -21,7 +21,8 @@
 
         <activity
             android:name=".mvp.ui.splash.SplashActivity"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar"
+            android:hardwareAccelerated="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,6 +36,10 @@
         <meta-data
             android:name="com.razorpay.ApiKey"
             android:value="rzp_test_pF2PmSu5GqwUCX" />
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="@string/ads_app_id"/>
 
     </application>
 

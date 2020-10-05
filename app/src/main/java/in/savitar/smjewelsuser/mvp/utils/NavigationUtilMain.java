@@ -15,6 +15,7 @@ import java.lang.ref.WeakReference;
 import in.savitar.smjewelsuser.databinding.ActivityMainBinding;
 import in.savitar.smjewelsuser.databinding.ActivitySplashBinding;
 import in.savitar.smjewelsuser.mvp.ui.Dashboard.DashboardFragment;
+import in.savitar.smjewelsuser.mvp.ui.Dashboard.PlanWinnersFragment;
 import in.savitar.smjewelsuser.mvp.ui.Dashboard.UserProfileFragment;
 import in.savitar.smjewelsuser.mvp.ui.splash.SplashFragment;
 
@@ -72,6 +73,10 @@ public enum NavigationUtilMain {
 
     public void toUserProfile() {
         addFragment(new UserProfileFragment(), UserProfileFragment.class.getSimpleName(),true);
+    }
+
+    public void toPlanWinners() {
+        addFragment(new PlanWinnersFragment(), PlanWinnersFragment.class.getSimpleName(),true);
     }
 
 }

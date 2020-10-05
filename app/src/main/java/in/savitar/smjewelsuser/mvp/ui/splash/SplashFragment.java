@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.ads.AdRequest;
+
 import in.savitar.smjewelsuser.R;
 import in.savitar.smjewelsuser.databinding.FragmentSplashBinding;
 import in.savitar.smjewelsuser.mvp.utils.NavigationUtil;
@@ -40,6 +42,8 @@ public class SplashFragment extends Fragment implements SplashContract.View {
     }
 
     private void init() {
+
+
 
         new Handler().postDelayed(new Runnable() {
             @Override

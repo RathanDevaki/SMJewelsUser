@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="6dp"
+                android:text="October 2020"
+                android:textSize="18sp"
+                android:textColor="@color/colorPrimaryDark"
+                android:fontFamily="@font/montserrat_bold"
+                android:id="@+id/single_winner_month"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:padding="16dp"
+                android:layout_marginTop="24dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Winner 1"
+                        android:textAlignment="center"
+                        android:layout_gravity="center"
+                        android:textSize="18sp"
+                        android:layout_marginBottom="8dp"
+                        android:fontFamily="@font/montserrat_semi_bold"
+                        android:textColor="@color/colorBlack"/>
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:layout_width="64dp"
+                            android:layout_gravity="center"
+                            android:layout_height="64dp"
+                            android:layout_marginBottom="8dp"
+                            android:id="@+id/single_winner_one_photo"/>
+
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/winner_1"
+                            android:layout_gravity="bottom"/>
+
+                    </FrameLayout>
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Abhishek Das R"
+                        android:layout_gravity="center"
+                        android:textColor="@color/colorBlack"
+                        android:fontFamily="@font/montserrat_semi_bold"
+                        android:textSize="16sp"
+                        android:layout_marginTop="16dp"
+                        android:id="@+id/single_winner_one_name"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="202008001"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:textSize="14sp"
+                        android:id="@+id/single_winner_one_id"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Winner 2"
+                        android:textAlignment="center"
+                        android:layout_gravity="center"
+                        android:textSize="18sp"
+                        android:layout_marginBottom="8dp"
+                        android:fontFamily="@font/montserrat_semi_bold"
+                        android:textColor="@color/colorBlack"/>
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:layout_width="64dp"
+                            android:layout_gravity="center"
+                            android:layout_height="64dp"
+                            android:layout_marginBottom="8dp"
+                            android:id="@+id/single_winner_two_photo"/>
+
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/winner_1"
+                            android:layout_gravity="bottom"/>
+
+                    </FrameLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Abhishek Das R"
+                        android:layout_gravity="center"
+                        android:textColor="@color/colorBlack"
+                        android:fontFamily="@font/montserrat_semi_bold"
+                        android:textSize="16sp"
+                        android:layout_marginTop="16dp"
+                        android:id="@+id/single_winner_two_name"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="202008001"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:textSize="14sp"
+                        android:id="@+id/single_winner_two_id"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginBottom="12dp"
+                android:background="@color/grey"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"/>
+
+        </LinearLayout>
+
+
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

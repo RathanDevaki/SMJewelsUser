@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.ads.AdRequest;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -35,6 +36,7 @@ import in.savitar.smjewelsuser.DialogFragments.AmountPayableFragment;
 import in.savitar.smjewelsuser.Modal.TransactionsModal;
 import in.savitar.smjewelsuser.R;
 import in.savitar.smjewelsuser.databinding.FragmentDashboardBinding;
+import in.savitar.smjewelsuser.mvp.utils.NavigationUtil;
 import in.savitar.smjewelsuser.mvp.utils.NavigationUtilMain;
 
 
@@ -69,6 +71,9 @@ public class DashboardFragment extends Fragment implements DashboardContract.Vie
 
     private void init() {
 
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mBinding.dashboardAdBanner.loadAd(adRequest);
+
         mBinding.userPhotoDashboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,6 +92,20 @@ public class DashboardFragment extends Fragment implements DashboardContract.Vie
 
         fetchDrawWinner();
 
+        mBinding.planWinnerOne.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavigationUtilMain.INSTANCE.toPlanWinners();
+            }
+        });
+
+        mBinding.planWinnerTwo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavigationUtilMain.INSTANCE.toPlanWinners();
+            }
+        });
+
     }
 
     private void fetchDrawWinner() {
@@ -97,11 +116,18 @@ public class DashboardFragment extends Fragment implements DashboardContract.Vie
         lastQuery.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                mBinding.planWinnerName.setText(snapshot.child("Name").getValue(String.class));
+                mBinding.planWinnerName.setText(snapshot.child("Winner1").getValue(String.class));
                 Glide
                         .with(getContext())
-                        .load(snapshot.child("Photo").getValue(String.class))
+                        .load(snapshot.child("Photo1").getValue(String.class))
                         .into(mBinding.planWinnerPhoto);
+
+                //Winner 2
+                mBinding.planWinnerNameTwo.setText(snapshot.child("Winner2").getValue(String.class));
+                Glide
+                        .with(getContext())
+                        .load(snapshot.child("Photo2").getValue(String.class))
+                        .into(mBinding.planWinnerPhotoTwo);
             }
 
             @Override
@@ -124,13 +150,19 @@ public class DashboardFragment extends Fragment implements DashboardContract.Vie
 
             }
         });
-//        HashMap<String,String> drawMap = new HashMap<>();
-//        drawMap.put("Name","Shrivathsa J V");
-//        drawMap.put("Month","August 2020");
-//        drawMap.put("UserID","202008002");
-//        drawMap.put("Photo","https://firebasestorage.googleapis.com/v0/b/sm-jewels.appspot.com/o/ProfilePictures%2FD8dDZukXUAAXLdY.jpg?alt=media&token=8e289afe-4fdf-4e04-b39d-b96b4ac0ad6a");
-//        databaseReference.child("DrawWinners").push().setValue(drawMap);
 
+//        HashMap<String,String> drawMap = new HashMap<>();
+//        drawMap.put("Winner1","Shrivathsa J V");
+//        drawMap.put("Winner2","Nagraj Patake");
+//        drawMap.put("Month","August 2020");
+//        drawMap.put("UserID1","202008002");
+//        drawMap.put("UserID2","202008003");
+//        drawMap.put("Photo1","https://firebasestorage.googleapis.com/v0/b/sm-jewels.appspot.com/o/ProfilePictures%2FD8dDZukXUAAXLdY.jpg?alt=media&token=8e289afe-4fdf-4e04-b39d-b96b4ac0ad6a");
+//        drawMap.put("Photo2","https://firebasestorage.googleapis.com/v0/b/sm-jewels.appspot.com/o/ProfilePictures%2FD8dDZukXUAAXLdY.jpg?alt=media&token=8e289afe-4fdf-4e04-b39d-b96b4ac0ad6a");
+//
+//        String pushKey = databaseReference.push().getKey();
+//
+//        databaseReference.child(pushKey).setValue(drawMap);
 
 
     }
@@ -173,20 +205,33 @@ public class DashboardFragment extends Fragment implements DashboardContract.Vie
 
             }
         }); //Getting Due Date and plan Amount
-        databaseReference.child(planName).child("UsersList").child(userKey).addListenerForSingleValueEvent(new ValueEventListener() {
+
+
+        databaseReference.child(planName).child("UsersList").child("Set1").child(userKey).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 mBinding.userNameDashboard.setText("Hi," + snapshot.child("Name").getValue(String.class));
-                Glide
-                        .with(getContext())
-                        .load(snapshot.child("ProfilePhoto").getValue(String.class))
-                        .into(mBinding.userPhotoDashboard);
+
+                if (snapshot.hasChild("ProfilePhoto")){
+                    Glide
+                            .with(getContext())
+                            .load(snapshot.child("ProfilePhoto").getValue(String.class))
+                            .into(mBinding.userPhotoDashboard);
+                } else {
+                    Glide
+                            .with(getContext())
+                            .load("https://firebasestorage.googleapis.com/v0/b/sm-jewels.appspot.com/o/img_162044.png?alt=media&token=c5445416-61d0-4ea7-90e7-a77a5e65cd09")
+                            .into(mBinding.userPhotoDashboard);
+                }
+
 
                 mBinding.planNameProgress.setText(planName);
+
                 long totalMonths = snapshot.child("TotalMonths").getValue(Long.class);
                 long completedMonths = snapshot.child("CompletedMonths").getValue(Long.class);
                 long percentageCompleted = (completedMonths*100)/totalMonths;
                 int _completedPercentage = (int)percentageCompleted;
+
                 mBinding.progressPercentage.setText(String.valueOf(_completedPercentage) + "% Completed");
                 mBinding.planProgress.setProgress(_completedPercentage);
 
@@ -196,7 +241,11 @@ public class DashboardFragment extends Fragment implements DashboardContract.Vie
                 mBinding.totalTransactions.setText(String.valueOf(completedMonths));
                 mBinding.totalPaidAmount.setText("Rs." + String.valueOf(completedMonths * 500) + "/-");
 
-                getNextPayingDate(snapshot.child("LastPaidMonth").getValue(String.class));
+                if (snapshot.hasChild("LastPaidMonth")){
+                    getNextPayingDate(snapshot.child("LastPaidMonth").getValue(String.class));
+                }
+
+
 
             }
 
@@ -212,7 +261,7 @@ public class DashboardFragment extends Fragment implements DashboardContract.Vie
         final TransactionsAdapter adapter = new TransactionsAdapter(getContext(),R.layout.single_transaction_layout,list);
         mBinding.transactionsList.setAdapter(adapter);
 
-        databaseReference.child(planName).child("UsersList").child(userKey).child("Transactions")
+        databaseReference.child(planName).child("UsersList").child("Set1").child(userKey).child("Transactions")
                 .addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {

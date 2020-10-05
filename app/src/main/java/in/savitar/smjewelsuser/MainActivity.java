@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements DashboardContract
         SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs",MODE_PRIVATE);
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = firebaseDatabase.getReference().child(sharedPreferences.getString("Plan",""));
-        databaseReference.child("UsersList").child(sharedPreferences.getString("UserKey","")).child("LastLogin")
+        databaseReference.child("UsersList").child("Set1").child(sharedPreferences.getString("UserKey","")).child("LastLogin")
                 .setValue(getCurrentTimeAndDate());
 
     }
@@ -110,16 +110,16 @@ public class MainActivity extends AppCompatActivity implements DashboardContract
         transactionMap.put("Comments","Paid");
         transactionMap.put("Date",getCurrentTimeAndDate());
 
-        databaseReference.child("UsersList").child(preferences.getString("UserKey",""))
+        databaseReference.child("UsersList").child("Set1").child(preferences.getString("UserKey",""))
                 .child("Transactions").push().setValue(transactionMap);
 
-        databaseReference.child("UsersList").child(preferences.getString("UserKey",""))
+        databaseReference.child("UsersList").child("Set1").child(preferences.getString("UserKey",""))
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         long _completedMonths = snapshot.child("CompletedMonths").getValue(Long.class);
                         _completedMonths = _completedMonths+1;
-                        databaseReference.child("UsersList").child(preferences.getString("UserKey",""))
+                        databaseReference.child("UsersList").child("Set1").child(preferences.getString("UserKey",""))
                                 .child("CompletedMonths").setValue(_completedMonths);
                         NavigationUtilMain.INSTANCE.setUpDashboard();
                     }
