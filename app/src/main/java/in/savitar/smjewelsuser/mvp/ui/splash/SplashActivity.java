@@ -15,21 +15,21 @@ public class SplashActivity extends AppCompatActivity implements SplashContract.
     ActivitySplashBinding mBinding;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this,R.layout.activity_splash);
         mPresenter = new SplashPresenter(this);
         init();
         mBinding.getRoot();
     }
-
-
     private void init() {
         setupNavigator();
         NavigationUtil.INSTANCE.setSplash();
     }
 
-    protected void setupNavigator() {
+    protected void setupNavigator()
+    {
         NavigationUtil.INSTANCE.setupNavigator(this, getSupportActionBar(), getmBinding(), null);
     }
 

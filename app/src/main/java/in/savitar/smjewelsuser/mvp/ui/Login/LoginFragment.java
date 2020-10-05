@@ -21,10 +21,6 @@ import android.widget.Toast;
 
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.TaskExecutors;
@@ -92,8 +88,10 @@ public class LoginFragment extends Fragment implements SplashContract.View {
     }
 
     private void init() {
+        //Initialize Ad Banner
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mBinding.loginAdBanner.loadAd(adRequest);
 
-        loadAd();
 
         mAuth = FirebaseAuth.getInstance();
         //Bottom Sheet
@@ -102,7 +100,7 @@ public class LoginFragment extends Fragment implements SplashContract.View {
         mBinding.getOtp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (TextUtils.isEmpty(mBinding.userIdEt.getText()) ) {
+                if (TextUtils.isEmpty(mBinding.userIdEt.getText()) || mBinding.userIdEt.getText().length() < 7) {
                     mBinding.userIdEt.setError("Invalid ID");
                 } else {
                     getPhoneNumber(mBinding.userIdEt.getText().toString());
@@ -135,18 +133,6 @@ public class LoginFragment extends Fragment implements SplashContract.View {
 
     }
 
-    private void loadAd() {
-
-        MobileAds.initialize(getContext(), new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
-
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mBinding.loginAdBanner.loadAd(adRequest);
-    }
-
     //To Load and display images into image slider
     private void displayImageSlider() {
         List<SlideModel> slideModels = new ArrayList<>();
@@ -166,7 +152,7 @@ public class LoginFragment extends Fragment implements SplashContract.View {
                 if (snapshot.hasChild(userID)) {
                     String phoneNumber = snapshot.child(userID).child("Phone").getValue(String.class);
                     //Toast.makeText(context,"Phone Number=>"+phoneNumber,Toast.LENGTH_LONG).show();
-                    planName = snapshot.child(userID).child("PlanName").getValue(String.class);
+                    planName = snapshot.child(userID).child("Plan").getValue(String.class);
                     userUniqueID = snapshot.child(userID).child("UserID").getValue(String.class);
                     sendOtp(phoneNumber); // Sending OTP to the number
                 } else {

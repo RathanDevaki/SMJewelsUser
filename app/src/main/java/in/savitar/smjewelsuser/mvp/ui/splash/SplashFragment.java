@@ -1,7 +1,5 @@
 package in.savitar.smjewelsuser.mvp.ui.splash;
-
 import android.os.Bundle;
-
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
@@ -24,7 +22,6 @@ public class SplashFragment extends Fragment implements SplashContract.View {
     public SplashFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

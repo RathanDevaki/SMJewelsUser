@@ -1,5 +1,6 @@
 package in.savitar.smjewelsuser.mvp.ui.Login;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -24,7 +26,10 @@ import com.google.firebase.storage.StorageReference;
 import com.nguyenhoanglam.imagepicker.model.Config;
 import com.nguyenhoanglam.imagepicker.ui.imagepicker.ImagePicker;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Locale;
 
 import es.dmoral.toasty.Toasty;
 import in.savitar.smjewelsuser.R;
@@ -102,7 +107,12 @@ public class CreateAccountFragment extends Fragment implements SplashContract.Vi
                 signUpUser();
             }
         });
-
+        mBinding.userDOBSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openCalendar();
+            }
+        });
         mBinding.userPhotoCreateAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -110,7 +120,33 @@ public class CreateAccountFragment extends Fragment implements SplashContract.Vi
             }
         });
     }
+    private void openCalendar() {
 
+        final Calendar myCalendar = Calendar.getInstance();
+
+        DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                // TODO Auto-generated method stub
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+                String myFormat = "dd/MM/yyyy"; //In which you need put here
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.UK);
+
+                mBinding.userDOBSignUp.setText(sdf.format(myCalendar.getTime()));
+            }
+
+        };
+
+        new DatePickerDialog(getActivity(), date, myCalendar
+                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+
+    }
     private void selectImage() {
         Intent intent = new Intent();
         intent.setType("image/*");
