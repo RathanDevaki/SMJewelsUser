@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.denzcoskun.imageslider.models.SlideModel;
+import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.TaskExecutors;
@@ -87,6 +88,10 @@ public class LoginFragment extends Fragment implements SplashContract.View {
     }
 
     private void init() {
+        //Initialize Ad Banner
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mBinding.loginAdBanner.loadAd(adRequest);
+
 
         mAuth = FirebaseAuth.getInstance();
         //Bottom Sheet
@@ -95,7 +100,7 @@ public class LoginFragment extends Fragment implements SplashContract.View {
         mBinding.getOtp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (TextUtils.isEmpty(mBinding.userIdEt.getText()) || mBinding.userIdEt.getText().length() < 9) {
+                if (TextUtils.isEmpty(mBinding.userIdEt.getText()) || mBinding.userIdEt.getText().length() < 7) {
                     mBinding.userIdEt.setError("Invalid ID");
                 } else {
                     getPhoneNumber(mBinding.userIdEt.getText().toString());

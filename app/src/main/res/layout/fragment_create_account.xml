@@ -134,7 +134,6 @@
                         android:inputType="number"
                         android:padding="16dp"
                         android:textColor="@color/colorBlack" />
-
                     <EditText
                         android:id="@+id/userDOBSignUp"
                         android:layout_width="match_parent"
@@ -146,8 +145,11 @@
                         android:fontFamily="@font/montserrat_medium"
                         android:hint="Date of Birth"
                         android:textSize="14sp"
+                        android:editable="false"
+                        android:focusable="false"
                         android:padding="16dp"
                         android:textColor="@color/colorBlack" />
+
 
                     <EditText
                         android:id="@+id/userPANSignUp"

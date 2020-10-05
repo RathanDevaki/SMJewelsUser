@@ -36,27 +36,25 @@
                 android:layout_centerInParent="true"
                 android:layout_margin="36dp">
 
-                <TextView
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/logo_here"
-                    android:layout_gravity="center_horizontal"
-                    android:textColor="@color/colorPrimary"
-                    android:fontFamily="@font/montserrat_bold"
-                    android:textSize="18sp"/>
-
+                    android:src="@drawable/logo"
+                    android:layout_gravity="center_horizontal" />
                 <EditText
                     android:layout_gravity="center_horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
                     android:hint="User ID"
+                    android:backgroundTint="@color/colorPrimary"
                     android:fontFamily="@font/montserrat_medium"
                     android:textSize="14sp"
                     android:drawableLeft="@drawable/ic_baseline_account_circle_24"
                     android:drawablePadding="16dp"
                     android:textColor="@color/colorBlack"
                     android:id="@+id/user_id_et"/>
+
 
                 <Button
                     android:layout_width="match_parent"
@@ -99,6 +97,14 @@
 
 
             </LinearLayout>
+
+            <com.google.android.gms.ads.AdView
+                android:id="@+id/loginAdBanner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|bottom"
+                app:adSize="BANNER"
+                app:adUnitId="@string/dummy_ad_ID" />
 
 
         </LinearLayout>
