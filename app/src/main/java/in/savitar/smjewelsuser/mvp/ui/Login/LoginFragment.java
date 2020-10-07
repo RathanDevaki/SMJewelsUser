@@ -65,6 +65,7 @@ public class LoginFragment extends Fragment implements SplashContract.View {
 
     private String userUniqueID;
     private String planName;
+    private String setName;
 
 
     public LoginFragment() {
@@ -152,8 +153,12 @@ public class LoginFragment extends Fragment implements SplashContract.View {
                 if (snapshot.hasChild(userID)) {
                     String phoneNumber = snapshot.child(userID).child("Phone").getValue(String.class);
                     //Toast.makeText(context,"Phone Number=>"+phoneNumber,Toast.LENGTH_LONG).show();
-                    planName = snapshot.child(userID).child("Plan").getValue(String.class);
+                    planName = snapshot.child(userID).child("PlanName").getValue(String.class);
                     userUniqueID = snapshot.child(userID).child("UserID").getValue(String.class);
+
+                    if (planName.compareToIgnoreCase("PlanA") == 0){
+                        setName = snapshot.child(userID).child("SetName").getValue(String.class);
+                    }
                     sendOtp(phoneNumber); // Sending OTP to the number
                 } else {
                     Toast.makeText(getContext(), "User Does not exist. Please Register", Toast.LENGTH_LONG).show();
@@ -222,8 +227,12 @@ public class LoginFragment extends Fragment implements SplashContract.View {
                 try {
                     if (task.isSuccessful()) {
                         //Code to set user session
-                        saveUserID(); //Saves user ID and plan Name in shared preferences
-                        NavigationUtil.INSTANCE.toMainActivity();
+                        saveUserID();
+                        //Saves user ID and plan Name in shared preferences
+                            NavigationUtil.INSTANCE.toMainActivity();
+
+
+
                     } else {
 
                         String message = "Somthing is wrong, we will fix it soon...";
@@ -249,6 +258,11 @@ public class LoginFragment extends Fragment implements SplashContract.View {
         editor.putString("UserKey",userUniqueID);
         editor.putString("UserID",mBinding.userIdEt.getText().toString());
         editor.putString("Plan",planName);
+
+        if (planName.compareToIgnoreCase("PlanA") == 0){
+            editor.putString("SetName",setName);
+        }
+
         editor.commit();
     }
 

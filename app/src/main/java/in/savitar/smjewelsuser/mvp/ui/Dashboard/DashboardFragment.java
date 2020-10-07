@@ -28,6 +28,7 @@ import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -192,103 +193,116 @@ public class DashboardFragment extends Fragment implements DashboardContract.Vie
         String userKey = preferences.getString("UserKey","");
         final String userID = preferences.getString("UserID","");
 
-        databaseReference.child(planName).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                dueDate = snapshot.child("DueDate").getValue(String.class);
-                planAmount = snapshot.child("PlanAmount").getValue(Long.class);
-                mBinding.upcomingAmount.setText("Rs." + snapshot.child("PlanAmount").getValue(Long.class) + "/-");
-            }
+        if (planName.compareToIgnoreCase("PlanA") == 0) { //If Plan is A
+            String setName = preferences.getString("SetName","");
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        }); //Getting Due Date and plan Amount
-
-
-        databaseReference.child(planName).child("UsersList").child("Set1").child(userKey).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                mBinding.userNameDashboard.setText("Hi," + snapshot.child("Name").getValue(String.class));
-
-                if (snapshot.hasChild("ProfilePhoto")){
-                    Glide
-                            .with(getContext())
-                            .load(snapshot.child("ProfilePhoto").getValue(String.class))
-                            .into(mBinding.userPhotoDashboard);
-                } else {
-                    Glide
-                            .with(getContext())
-                            .load("https://firebasestorage.googleapis.com/v0/b/sm-jewels.appspot.com/o/img_162044.png?alt=media&token=c5445416-61d0-4ea7-90e7-a77a5e65cd09")
-                            .into(mBinding.userPhotoDashboard);
+            databaseReference.child(planName).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    dueDate = snapshot.child("DueDate").getValue(String.class);
+                    planAmount = snapshot.child("PlanAmount").getValue(Long.class);
+                    mBinding.upcomingAmount.setText("Rs." + snapshot.child("PlanAmount").getValue(Long.class) + "/-");
                 }
 
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-                mBinding.planNameProgress.setText(planName);
+                }
+            }); //Getting Due Date and plan Amount
 
-                long totalMonths = snapshot.child("TotalMonths").getValue(Long.class);
-                long completedMonths = snapshot.child("CompletedMonths").getValue(Long.class);
-                long percentageCompleted = (completedMonths*100)/totalMonths;
-                int _completedPercentage = (int)percentageCompleted;
 
-                mBinding.progressPercentage.setText(String.valueOf(_completedPercentage) + "% Completed");
-                mBinding.planProgress.setProgress(_completedPercentage);
+            databaseReference.child(planName).child("UsersList").child(setName).child(userKey).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    mBinding.userNameDashboard.setText("Hi," + snapshot.child("Name").getValue(String.class));
 
-                mBinding.lastLoginDashboard.setText("Last login on "+snapshot.child("LastLogin").getValue(String.class));
-                mBinding.userIdDashboard.setText(userID);
-                mBinding.progressPercentageMonths.setText(String.valueOf(completedMonths) + "/" + String.valueOf(totalMonths) + " Months");
-                mBinding.totalTransactions.setText(String.valueOf(completedMonths));
-                mBinding.totalPaidAmount.setText("Rs." + String.valueOf(completedMonths * 500) + "/-");
+                    if (getActivity() == null) {
+                        return;
+                    }
 
-                if (snapshot.hasChild("LastPaidMonth")){
-                    getNextPayingDate(snapshot.child("LastPaidMonth").getValue(String.class));
+                    if (snapshot.hasChild("ProfilePhoto")){
+                        Glide
+                                .with(getActivity())
+                                .load(snapshot.child("ProfilePhoto").getValue(String.class))
+                                .into(mBinding.userPhotoDashboard);
+                    } else {
+                        Glide
+                                .with(getActivity())
+                                .load("https://firebasestorage.googleapis.com/v0/b/sm-jewels.appspot.com/o/img_162044.png?alt=media&token=c5445416-61d0-4ea7-90e7-a77a5e65cd09")
+                                .into(mBinding.userPhotoDashboard);
+                    }
+
+
+                    mBinding.planNameProgress.setText(planName);
+
+                    if (snapshot.hasChild("TotalMonths")){
+                        long totalMonths = snapshot.child("TotalMonths").getValue(Long.class);
+                        long completedMonths = snapshot.child("CompletedMonths").getValue(Long.class);
+                        long percentageCompleted = (completedMonths*100)/totalMonths;
+                        int _completedPercentage = (int)percentageCompleted;
+
+                        mBinding.progressPercentage.setText(String.valueOf(_completedPercentage) + "% Completed");
+                        mBinding.planProgress.setProgress(_completedPercentage);
+
+                        mBinding.lastLoginDashboard.setText("Last login on "+snapshot.child("LastLogin").getValue(String.class));
+                        mBinding.userIdDashboard.setText(userID);
+                        mBinding.progressPercentageMonths.setText(String.valueOf(completedMonths) + "/" + String.valueOf(totalMonths) + " Months");
+                        mBinding.totalTransactions.setText(String.valueOf(completedMonths));
+                        mBinding.totalPaidAmount.setText("Rs." + String.valueOf(completedMonths * 500) + "/-");
+
+                        if (snapshot.hasChild("LastPaidMonth")){
+                            getNextPayingDate(snapshot.child("LastPaidMonth").getValue(String.class));
+                        }
+                    }
+
+
                 }
 
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+                }
+            });
 
 
 
-        List<TransactionsModal> list = new ArrayList<>();
-        final TransactionsAdapter adapter = new TransactionsAdapter(getContext(),R.layout.single_transaction_layout,list);
-        mBinding.transactionsList.setAdapter(adapter);
+            final List<TransactionsModal> list = new ArrayList<>();
+            final TransactionsAdapter adapter = new TransactionsAdapter(getContext(),R.layout.single_transaction_layout,list);
+            mBinding.transactionsList.setAdapter(adapter);
 
-        databaseReference.child(planName).child("UsersList").child("Set1").child(userKey).child("Transactions")
-                .addChildEventListener(new ChildEventListener() {
-                    @Override
-                    public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                        TransactionsModal modal = snapshot.getValue(TransactionsModal.class);
-                        adapter.add(modal);
-                    }
+            databaseReference.child(planName).child("UsersList").child(setName).child(userKey).child("Transactions")
+                    .addChildEventListener(new ChildEventListener() {
+                        @Override
+                        public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                            TransactionsModal modal = snapshot.getValue(TransactionsModal.class);
+                            list.add(modal);
+                            Collections.reverse(list);
+                            adapter.notifyDataSetChanged();
+                        }
 
-                    @Override
-                    public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                        @Override
+                        public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
-                    }
+                        }
 
-                    @Override
-                    public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+                        @Override
+                        public void onChildRemoved(@NonNull DataSnapshot snapshot) {
 
-                    }
+                        }
 
-                    @Override
-                    public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                        @Override
+                        public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
-                    }
+                        }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
-                    }
-                });
+                        }
+                    });
+        }
+
+
 
 
     }

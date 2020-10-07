@@ -7,6 +7,11 @@ import androidx.databinding.DataBindingUtil;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,6 +37,10 @@ public class MainActivity extends AppCompatActivity implements DashboardContract
     DashboardContract.Presenter mPresenter;
     ActivityMainBinding mBinding;
 
+    InterstitialAd interstitialAd;
+
+    public int amount;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +53,26 @@ public class MainActivity extends AppCompatActivity implements DashboardContract
 
     private void init() {
         setupNavigator();
-        NavigationUtilMain.INSTANCE.setUpDashboard();
+
+        //showInterstitialAd();
+
+        SharedPreferences preferences = getSharedPreferences("MyPrefs",MODE_PRIVATE);
+
+        if (preferences.getString("Plan","").compareToIgnoreCase("PlanA") == 0){
+            NavigationUtilMain.INSTANCE.setUpDashboard();
+        } else {
+            NavigationUtilMain.INSTANCE.toPlanB();
+        }
+
+    }
+
+    private void showInterstitialAd() {
+
+        interstitialAd = new InterstitialAd(this);
+        interstitialAd.setAdUnitId(getString(R.string.dummy_ad_ID));
+        interstitialAd.loadAd(new AdRequest.Builder().build());
+        interstitialAd.show();
+
     }
 
     protected void setupNavigator() {
@@ -102,33 +130,90 @@ public class MainActivity extends AppCompatActivity implements DashboardContract
     private void updateTransactionInfo() {
 
         final SharedPreferences preferences = getSharedPreferences("MyPrefs",MODE_PRIVATE);
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+
+        final String userID = preferences.getString("UserKey","");
+        String planName = preferences.getString("Plan","");
+        final FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         final DatabaseReference databaseReference = firebaseDatabase.getReference().child(preferences.getString("Plan",""));
 
-        HashMap<String,String> transactionMap = new HashMap<>();
-        transactionMap.put("Amount","500");
+
+
+
+        HashMap<String,Object> transactionMap = new HashMap<>();
+        transactionMap.put("Amount",String.valueOf(amount));
         transactionMap.put("Comments","Paid");
         transactionMap.put("Date",getCurrentTimeAndDate());
 
-        databaseReference.child("UsersList").child("Set1").child(preferences.getString("UserKey",""))
-                .child("Transactions").push().setValue(transactionMap);
+        if (preferences.getString("Plan","").compareToIgnoreCase("PlanA") == 0){
+            databaseReference.child("UsersList").child(preferences.getString("SetName","")).child(preferences.getString("UserKey",""))
+                    .child("Transactions").push().setValue(transactionMap);
 
-        databaseReference.child("UsersList").child("Set1").child(preferences.getString("UserKey",""))
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        long _completedMonths = snapshot.child("CompletedMonths").getValue(Long.class);
-                        _completedMonths = _completedMonths+1;
-                        databaseReference.child("UsersList").child("Set1").child(preferences.getString("UserKey",""))
-                                .child("CompletedMonths").setValue(_completedMonths);
-                        NavigationUtilMain.INSTANCE.setUpDashboard();
-                    }
+            databaseReference.child("UsersList").child(preferences.getString("SetName","")).child(preferences.getString("UserKey",""))
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            long _completedMonths = snapshot.child("CompletedMonths").getValue(Long.class);
+                            _completedMonths = _completedMonths+1;
+                            databaseReference.child("UsersList").child("Set1").child(preferences.getString("UserKey",""))
+                                    .child("CompletedMonths").setValue(_completedMonths);
+                            NavigationUtilMain.INSTANCE.setUpDashboard();
+                        }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
-                    }
-                });
+                        }
+                    });
+        } else if (preferences.getString("Plan","").compareToIgnoreCase("PlanB") == 0) {
+            DatabaseReference databaseReference1 = firebaseDatabase.getReference().child(planName)
+                    .child("UsersList").child(userID);
+            databaseReference1.child("Transactions").push().setValue(transactionMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    Toasty.success(MainActivity.this,"Payment Successfull").show();
+                }
+            });
+
+            DatabaseReference databaseReference2 = firebaseDatabase.getReference().child("PlanB").child("GoldRate");
+            databaseReference2.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    final Double goldRate = snapshot.getValue(Double.class);
+                    int _amount = amount;
+                    final Double grams = _amount / goldRate;
+
+                    final DatabaseReference databaseReference3 = firebaseDatabase.getReference().child("PlanB")
+                            .child("UsersList").child(userID);
+                    databaseReference3.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.hasChild("GoldSaved")){
+                                Double goldSaved = snapshot.child("GoldSaved").getValue(Double.class);
+                                goldSaved = goldSaved + grams;
+                                databaseReference3.child("GoldSaved").setValue(goldSaved);
+                            } else {
+                                databaseReference3.child("GoldSaved").setValue(grams);
+
+                            }
+
+                            NavigationUtilMain.INSTANCE.toPlanB();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+
+        }
 
     }
 

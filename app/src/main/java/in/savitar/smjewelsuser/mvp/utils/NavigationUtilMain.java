@@ -17,6 +17,7 @@ import in.savitar.smjewelsuser.databinding.ActivitySplashBinding;
 import in.savitar.smjewelsuser.mvp.ui.Dashboard.DashboardFragment;
 import in.savitar.smjewelsuser.mvp.ui.Dashboard.PlanWinnersFragment;
 import in.savitar.smjewelsuser.mvp.ui.Dashboard.UserProfileFragment;
+import in.savitar.smjewelsuser.mvp.ui.PlanB.PlanBFragment;
 import in.savitar.smjewelsuser.mvp.ui.splash.SplashFragment;
 
 public enum NavigationUtilMain {
@@ -70,6 +71,11 @@ public enum NavigationUtilMain {
     public void setUpDashboard() {
         addFragment(new DashboardFragment(), DashboardFragment.class.getSimpleName(),false);
     }
+
+    public void toPlanB() {
+        addFragment(new PlanBFragment(), PlanBFragment.class.getSimpleName(),false);
+    }
+
 
     public void toUserProfile() {
         addFragment(new UserProfileFragment(), UserProfileFragment.class.getSimpleName(),true);
