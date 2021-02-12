@@ -3,6 +3,8 @@ package in.savitar.smjewelsuser.mvp.utils;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 
+import java.lang.ref.WeakReference;
+
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,9 +12,6 @@ import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
-import java.lang.ref.WeakReference;
-
 import in.savitar.smjewelsuser.MainActivity;
 import in.savitar.smjewelsuser.databinding.ActivitySplashBinding;
 import in.savitar.smjewelsuser.mvp.ui.Login.CreateAccountFragment;

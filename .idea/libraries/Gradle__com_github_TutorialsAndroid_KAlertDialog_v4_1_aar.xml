@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.TutorialsAndroid:KAlertDialog:v4.1@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1f395099fded10e39ed240329ae2fb41/jetified-KAlertDialog-v4.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1f395099fded10e39ed240329ae2fb41/jetified-KAlertDialog-v4.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1f395099fded10e39ed240329ae2fb41/jetified-KAlertDialog-v4.1/res" />
+      <root url="file://$PROJECT_DIR$/../caches/transforms-2/files-2.1/430c192d901819db01fa471b81ce2394/jetified-KAlertDialog-v4.1/res" />
+      <root url="jar://$PROJECT_DIR$/../caches/transforms-2/files-2.1/430c192d901819db01fa471b81ce2394/jetified-KAlertDialog-v4.1/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../caches/transforms-2/files-2.1/430c192d901819db01fa471b81ce2394/jetified-KAlertDialog-v4.1/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.TutorialsAndroid/KAlertDialog/v4.1/6c3c5c52f02a697423bbaca6b7fc57706f82f378/KAlertDialog-v4.1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../caches/modules-2/files-2.1/com.github.TutorialsAndroid/KAlertDialog/v4.1/6c3c5c52f02a697423bbaca6b7fc57706f82f378/KAlertDialog-v4.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -3,13 +3,8 @@ package in.savitar.smjewelsuser.mvp.ui.Dashboard;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
+import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,20 +19,20 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.DateFormatSymbols;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import in.savitar.smjewelsuser.Adapters.TransactionsAdapter;
 import in.savitar.smjewelsuser.DialogFragments.AmountPayableFragment;
 import in.savitar.smjewelsuser.Modal.TransactionsModal;
 import in.savitar.smjewelsuser.R;
 import in.savitar.smjewelsuser.databinding.FragmentDashboardBinding;
-import in.savitar.smjewelsuser.mvp.utils.NavigationUtil;
 import in.savitar.smjewelsuser.mvp.utils.NavigationUtilMain;
 
 
@@ -48,7 +43,7 @@ public class DashboardFragment extends Fragment implements DashboardContract.Vie
     FragmentDashboardBinding mBinding;
     String dueDate;
     long planAmount;
-
+    String lpm="";
     public DashboardFragment() {
         // Required empty public constructor
     }
@@ -84,12 +79,12 @@ public class DashboardFragment extends Fragment implements DashboardContract.Vie
 
         fetchBasicData(); //Fetches username and profile photo in dashboard
 
-        mBinding.payNowBtn.setOnClickListener(new View.OnClickListener() {
+        /* mBinding.payNowBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showPaymentSummaryDialog((int)planAmount);
             }
-        });
+        }); */
 
         fetchDrawWinner();
 
@@ -164,8 +159,6 @@ public class DashboardFragment extends Fragment implements DashboardContract.Vie
 //        String pushKey = databaseReference.push().getKey();
 //
 //        databaseReference.child(pushKey).setValue(drawMap);
-
-
     }
 
     private void showPaymentSummaryDialog(int i) {
@@ -183,7 +176,6 @@ public class DashboardFragment extends Fragment implements DashboardContract.Vie
     }
 
     private void fetchBasicData() {
-
 
 
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
@@ -234,23 +226,53 @@ public class DashboardFragment extends Fragment implements DashboardContract.Vie
 
 
                     mBinding.planNameProgress.setText(planName);
-
+                    mBinding.cardView.setVisibility(View.GONE);
+                    mBinding.summaryText.setVisibility(View.GONE);
                     if (snapshot.hasChild("TotalMonths")){
                         long totalMonths = snapshot.child("TotalMonths").getValue(Long.class);
+                        mBinding.cardView.setVisibility(View.VISIBLE);
+                        mBinding.summaryText.setVisibility(View.VISIBLE);
                         long completedMonths = snapshot.child("CompletedMonths").getValue(Long.class);
                         long percentageCompleted = (completedMonths*100)/totalMonths;
+
                         int _completedPercentage = (int)percentageCompleted;
+                        if(completedMonths ==  totalMonths)
+                        {
+                            mBinding.loadingLayout.setVisibility(View.GONE);
+                            mBinding.completeLayout.setVisibility(View.VISIBLE);
+                            mBinding.cardView.setVisibility(View.GONE);
+                            mBinding.summaryText.setVisibility(View.GONE);
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run()
+                                {
+                                   mBinding.completeAnimation.setVisibility(View.GONE);
+                                   mBinding.completeText.setVisibility(View.VISIBLE);
+                                  // Toast.makeText(getContext(),"Completed",Toast.LENGTH_LONG).show();
+                                }
+                            }, 3000);
+                        }
+                        else
+                        {
+                            mBinding.loadingLayout.setVisibility(View.GONE);
+                            mBinding.completeLayout.setVisibility(View.GONE);
+                            mBinding.cardView.setVisibility(View.VISIBLE);
+                            mBinding.summaryText.setVisibility(View.VISIBLE);
+                        }
 
                         mBinding.progressPercentage.setText(String.valueOf(_completedPercentage) + "% Completed");
                         mBinding.planProgress.setProgress(_completedPercentage);
 
-                        mBinding.lastLoginDashboard.setText("Last login on "+snapshot.child("LastLogin").getValue(String.class));
+                        //mBinding.lastLoginDashboard.setText("Last login on "+snapshot.child("LastLogin").getValue(String.class));
                         mBinding.userIdDashboard.setText(userID);
                         mBinding.progressPercentageMonths.setText(String.valueOf(completedMonths) + "/" + String.valueOf(totalMonths) + " Months");
                         mBinding.totalTransactions.setText(String.valueOf(completedMonths));
                         mBinding.totalPaidAmount.setText("Rs." + String.valueOf(completedMonths * 500) + "/-");
 
                         if (snapshot.hasChild("LastPaidMonth")){
+
+                          // lpm=snapshot.child("LastPaidMonth").getValue(String.class);
+
                             getNextPayingDate(snapshot.child("LastPaidMonth").getValue(String.class));
                         }
                     }
@@ -275,6 +297,7 @@ public class DashboardFragment extends Fragment implements DashboardContract.Vie
                         @Override
                         public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                             TransactionsModal modal = snapshot.getValue(TransactionsModal.class);
+                            Log.v("Modal",String.valueOf(modal));
                             list.add(modal);
                             Collections.reverse(list);
                             adapter.notifyDataSetChanged();
@@ -307,18 +330,36 @@ public class DashboardFragment extends Fragment implements DashboardContract.Vie
 
     }
 
-    private void getNextPayingDate(String lastPaidMonth) {
-
-        String[] _lastPaidMonth = lastPaidMonth.split("-");
+    private void getNextPayingDate(String lastPaidMonth)
+    {
+        Log.v("DateFire",lastPaidMonth);
+        String[] _lastPaidMonth = lastPaidMonth.split("/");
         String _day = _lastPaidMonth[0];
         String _month = _lastPaidMonth[1];
         String _year = _lastPaidMonth[2];
+        Log.v("Seperated date",_day+""+_month+""+_year);
 
-        Calendar currentMonth = Calendar.getInstance();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM");
-        currentMonth.add(Calendar.MONTH, 1);
-         String nextDate =  dateFormat.format(currentMonth.getTime()) + "-" +  _year;
-         mBinding.upcomingPaymentDate.setText(nextDate);
+        int intdate=12;
+        int intmonth=Integer.parseInt(_month);
+        int intyear=Integer.parseInt(_year);
+       if(intmonth == 12)
+       {
+          intyear++;
+          intmonth=1;
+       }
+       else {
+           intmonth++;
+       }
+        String nextDate = intdate+"/"+intmonth+"/"+intyear;
+
+       /*String[] _lpm=lpm.split("/");
+       if(_lpm[1] == _month)
+       {
+           mBinding.upcomingPaymentDate.setText("-");
+       }*/
+
+        mBinding.upcomingPaymentDate.setText(nextDate);
+        Log.v("Date",nextDate);
 
     }
 

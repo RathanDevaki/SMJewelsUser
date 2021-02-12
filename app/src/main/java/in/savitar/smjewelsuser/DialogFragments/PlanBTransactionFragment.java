@@ -3,12 +3,6 @@ package in.savitar.smjewelsuser.DialogFragments;
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
-
-import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -21,9 +15,10 @@ import com.razorpay.Checkout;
 
 import org.json.JSONObject;
 
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.DialogFragment;
 import in.savitar.smjewelsuser.MainActivity;
 import in.savitar.smjewelsuser.R;
-import in.savitar.smjewelsuser.databinding.FragmentAmountPayableBinding;
 import in.savitar.smjewelsuser.databinding.FragmentPlanBTransactionBinding;
 import in.savitar.smjewelsuser.mvp.ui.Dashboard.DashboardContract;
 import in.savitar.smjewelsuser.mvp.ui.Dashboard.DashboardPresenter;

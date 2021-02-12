@@ -4,18 +4,12 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
-
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.DatePicker;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -23,14 +17,15 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.StorageReference;
-import com.nguyenhoanglam.imagepicker.model.Config;
-import com.nguyenhoanglam.imagepicker.ui.imagepicker.ImagePicker;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
 import es.dmoral.toasty.Toasty;
 import in.savitar.smjewelsuser.R;
 import in.savitar.smjewelsuser.databinding.FragmentCreateAccountBinding;
@@ -147,6 +142,7 @@ public class CreateAccountFragment extends Fragment implements SplashContract.Vi
                 myCalendar.get(Calendar.DAY_OF_MONTH)).show();
 
     }
+
     private void selectImage() {
         Intent intent = new Intent();
         intent.setType("image/*");

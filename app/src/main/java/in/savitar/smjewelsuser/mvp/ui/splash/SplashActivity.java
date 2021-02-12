@@ -23,6 +23,8 @@ public class SplashActivity extends AppCompatActivity implements SplashContract.
         init();
         mBinding.getRoot();
     }
+
+
     private void init() {
         setupNavigator();
         NavigationUtil.INSTANCE.setSplash();

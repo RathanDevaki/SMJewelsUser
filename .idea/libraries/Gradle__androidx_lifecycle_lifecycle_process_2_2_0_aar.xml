@@ -1,0 +1,22 @@
+<component name="libraryTable">
+  <library name="Gradle: androidx.lifecycle:lifecycle-process:2.2.0@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/fbb45a1792cf0e97ccf5507b087b63b1/jetified-lifecycle-process-2.2.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/fbb45a1792cf0e97ccf5507b087b63b1/jetified-lifecycle-process-2.2.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/fbb45a1792cf0e97ccf5507b087b63b1/jetified-lifecycle-process-2.2.0/res" />
+      <root url="file://$PROJECT_DIR$/../caches/transforms-2/files-2.1/fbb45a1792cf0e97ccf5507b087b63b1/jetified-lifecycle-process-2.2.0/res" />
+      <root url="file://$PROJECT_DIR$/../caches/transforms-2/files-2.1/7359f053fde79a2c06463bc5d07b2764/jetified-lifecycle-process-2.2.0/res" />
+      <root url="file://$PROJECT_DIR$/../caches/transforms-2/files-2.1/4a1d5087b91a56bd2b90f37f1d0a7b61/jetified-lifecycle-process-2.2.0/res" />
+      <root url="file://$PROJECT_DIR$/../caches/transforms-2/files-2.1/835988bc002d352fd07859fc4af8e943/jetified-lifecycle-process-2.2.0/res" />
+      <root url="file://$PROJECT_DIR$/../caches/transforms-2/files-2.1/5069d7ab8bd20fd768ed54a51001ed53/jetified-lifecycle-process-2.2.0/res" />
+      <root url="file://$PROJECT_DIR$/../caches/transforms-2/files-2.1/dda7e579fd4c8683f6ef7d01dd325f60/jetified-lifecycle-process-2.2.0/res" />
+      <root url="file://$PROJECT_DIR$/../caches/transforms-2/files-2.1/dda7e579fd4c8683f6ef7d01dd325f60/jetified-lifecycle-process-2.2.0/AndroidManifest.xml" />
+      <root url="jar://$PROJECT_DIR$/../caches/transforms-2/files-2.1/dda7e579fd4c8683f6ef7d01dd325f60/jetified-lifecycle-process-2.2.0/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-process/2.2.0/87ad54b3a3ab3e83595fd66749e92beaf8123dd9/lifecycle-process-2.2.0-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-process/2.2.0/87ad54b3a3ab3e83595fd66749e92beaf8123dd9/lifecycle-process-2.2.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

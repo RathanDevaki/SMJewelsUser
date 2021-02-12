@@ -1,0 +1,19 @@
+<component name="libraryTable">
+  <library name="Gradle: com.google.firebase:firebase-measurement-connector:18.0.0@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/eb1940bc3fb957fd232db9f27e4df6ed/jetified-firebase-measurement-connector-18.0.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/eb1940bc3fb957fd232db9f27e4df6ed/jetified-firebase-measurement-connector-18.0.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/eb1940bc3fb957fd232db9f27e4df6ed/jetified-firebase-measurement-connector-18.0.0/res" />
+      <root url="file://$PROJECT_DIR$/../caches/transforms-2/files-2.1/eb1940bc3fb957fd232db9f27e4df6ed/jetified-firebase-measurement-connector-18.0.0/res" />
+      <root url="file://$PROJECT_DIR$/../caches/transforms-2/files-2.1/08fed9a37ff1b097cb9dc1528d3ea5d0/jetified-firebase-measurement-connector-18.0.0/res" />
+      <root url="file://$PROJECT_DIR$/../caches/transforms-2/files-2.1/e749ac1d1176bb9cd9bc25461c0be3a0/jetified-firebase-measurement-connector-18.0.0/res" />
+      <root url="file://$PROJECT_DIR$/../caches/transforms-2/files-2.1/d9c6c8335bee9b60dd0c36eed63a7e3c/jetified-firebase-measurement-connector-18.0.0/res" />
+      <root url="file://$PROJECT_DIR$/../caches/transforms-2/files-2.1/a6b0516c491b9ec6fdac822087fedd02/jetified-firebase-measurement-connector-18.0.0/res" />
+      <root url="jar://$PROJECT_DIR$/../caches/transforms-2/files-2.1/f50bedf5ef54909871db0e77f2d16d11/jetified-firebase-measurement-connector-18.0.0/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/../caches/transforms-2/files-2.1/f50bedf5ef54909871db0e77f2d16d11/jetified-firebase-measurement-connector-18.0.0/res" />
+      <root url="file://$PROJECT_DIR$/../caches/transforms-2/files-2.1/f50bedf5ef54909871db0e77f2d16d11/jetified-firebase-measurement-connector-18.0.0/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
