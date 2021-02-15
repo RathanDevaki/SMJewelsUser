@@ -120,7 +120,7 @@ public class PlanBFragment extends Fragment implements DashboardContract.View, A
 
         final FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         final DatabaseReference databaseReference = firebaseDatabase.getReference();
-        final DatabaseReference databaseReference2 = firebaseDatabase.getReference();
+        final DatabaseReference databaseReferenceRoot = firebaseDatabase.getReference();
         SharedPreferences preferences = getActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
         final String planName = preferences.getString("Plan","");
         final String userKey = preferences.getString("UserKey","");
@@ -237,14 +237,14 @@ public class PlanBFragment extends Fragment implements DashboardContract.View, A
                         long completedMonths = snapshot.child("CompletedMonths").getValue(Long.class);
                         long instPeriod = snapshot.child("InstallmentPeriod").getValue(Long.class);
                         if (instPeriod == 0) {
-                            databaseReference.child("PlanCompletionStatus").setValue("NA");
+                            databaseReference.child(planName).child("UsersList").child(userKey).child("PlanCompletionStatus").setValue("NA");
+                            databaseReferenceRoot.child("PlanCompletionStatus").child(userID).setValue("NA");
                             mBinding.cardView.setVisibility(View.GONE);
                             // mBinding.userWarning.setVisibility(View.VISIBLE);
                         }
                         else if (instPeriod == completedMonths && instPeriod != 0) {
-                            databaseReference.child("PlanCompletionStatus").setValue("Completed");
-                            databaseReference2.child("PlanCompletionStatus").child(userID).setValue("Completed");
-
+                            databaseReference.child(planName).child("UsersList").child(userKey).child("PlanCompletionStatus").setValue("Completed");
+                            databaseReferenceRoot.child("PlanCompletionStatus").child(userID).setValue("Completed");
                             mBinding.loadingLayout.setVisibility(View.GONE);
                             mBinding.completeLayout.setVisibility(View.VISIBLE);
                             mBinding.cardView.setVisibility(View.GONE);
