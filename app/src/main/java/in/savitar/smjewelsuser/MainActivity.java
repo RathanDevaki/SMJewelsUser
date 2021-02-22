@@ -54,10 +54,12 @@ public class MainActivity extends AppCompatActivity implements DashboardContract
 
         SharedPreferences preferences = getSharedPreferences("MyPrefs",MODE_PRIVATE);
 
-        if (preferences.getString("Plan","").compareToIgnoreCase("PlanA") == 0){
+        if (preferences.getString("Plan", "").compareToIgnoreCase("PlanA") == 0) {
             NavigationUtilMain.INSTANCE.setUpDashboard();
-        } else {
+        } else if (preferences.getString("Plan", "").compareToIgnoreCase("PlanB") == 0) {
             NavigationUtilMain.INSTANCE.toPlanB();
+        } else {
+            NavigationUtilMain.INSTANCE.toPlanC();
         }
 
     }
@@ -150,7 +152,7 @@ public class MainActivity extends AppCompatActivity implements DashboardContract
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             long _completedMonths = snapshot.child("CompletedMonths").getValue(Long.class);
                             _completedMonths = _completedMonths+1;
-                            databaseReference.child("UsersList").child("Set1").child(preferences.getString("UserKey",""))
+                            databaseReference.child("UsersList").child("Set1").child(preferences.getString("UserKey", ""))
                                     .child("CompletedMonths").setValue(_completedMonths);
                             NavigationUtilMain.INSTANCE.setUpDashboard();
                         }
@@ -160,14 +162,14 @@ public class MainActivity extends AppCompatActivity implements DashboardContract
 
                         }
                     });
-        } else if (preferences.getString("Plan","").compareToIgnoreCase("PlanB") == 0) {
+        } else if (preferences.getString("Plan", "").compareToIgnoreCase("PlanB") == 0) {
             DatabaseReference databaseReference1 = firebaseDatabase.getReference().child(planName)
                     .child("UsersList").child(userID);
             databaseReference1.child("Transactions").push().setValue(transactionMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
                     updateTransactionInfo();
-                    Toasty.success(MainActivity.this,"Payment Successfull").show();
+                    Toasty.success(MainActivity.this, "Payment Successfull").show();
                 }
             });
 
@@ -211,12 +213,13 @@ public class MainActivity extends AppCompatActivity implements DashboardContract
 
 
         }
+        //plan C payment
 
     }
 
     @Override
     public void onPaymentError(int i, String s) {
         updateTransactionInfo();
-        Toasty.success(this,"Payment Successfull").show();
+        Toasty.error(this, "Payment Error").show();
     }
 }

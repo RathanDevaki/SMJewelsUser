@@ -240,7 +240,7 @@ public class DashboardFragment extends Fragment implements DashboardContract.Vie
                         {
                             mBinding.loadingLayout.setVisibility(View.GONE);
                             mBinding.completeLayout.setVisibility(View.VISIBLE);
-                            mBinding.cardView.setVisibility(View.GONE);
+                            mBinding.cardView.setVisibility(View.VISIBLE);
                             mBinding.summaryText.setVisibility(View.GONE);
                             new Handler().postDelayed(new Runnable() {
                                 @Override
@@ -273,7 +273,7 @@ public class DashboardFragment extends Fragment implements DashboardContract.Vie
 
                           // lpm=snapshot.child("LastPaidMonth").getValue(String.class);
 
-                            getNextPayingDate(snapshot.child("LastPaidMonth").getValue(String.class));
+                            getNextPayingDate(snapshot.child("LastPaidMonth").getValue(String.class), snapshot.child("TotalTransactions").getValue(Long.class));
                         }
                     }
 
@@ -326,40 +326,41 @@ public class DashboardFragment extends Fragment implements DashboardContract.Vie
         }
 
 
-
-
     }
 
-    private void getNextPayingDate(String lastPaidMonth)
-    {
-        Log.v("DateFire",lastPaidMonth);
+    private void getNextPayingDate(String lastPaidMonth, Long totTrans) {
+        //int _totTrans=Integer.parseInt(totTrans);
+
+        Log.v("DateFire", lastPaidMonth);
         String[] _lastPaidMonth = lastPaidMonth.split("/");
         String _day = _lastPaidMonth[0];
         String _month = _lastPaidMonth[1];
         String _year = _lastPaidMonth[2];
-        Log.v("Seperated date",_day+""+_month+""+_year);
+        Log.v("Seperated date", _day + "" + _month + "" + _year);
 
-        int intdate=12;
-        int intmonth=Integer.parseInt(_month);
-        int intyear=Integer.parseInt(_year);
-       if(intmonth == 12)
-       {
-          intyear++;
-          intmonth=1;
-       }
-       else {
-           intmonth++;
-       }
-        String nextDate = intdate+"/"+intmonth+"/"+intyear;
+        int intdate = 12;
+        int intmonth = Integer.parseInt(_month);
+        int intyear = Integer.parseInt(_year);
+        if (intmonth == 12) {
+            intyear++;
+            intmonth = 1;
+        } else {
+            intmonth++;
+        }
+        String nextDate = intdate + "/" + intmonth + "/" + intyear;
 
        /*String[] _lpm=lpm.split("/");
        if(_lpm[1] == _month)
        {
            mBinding.upcomingPaymentDate.setText("-");
        }*/
-
+      /*  if(totTrans==0){
+            mBinding.upcomingPaymentDate.setText("-");
+        }
+        else {(*/
         mBinding.upcomingPaymentDate.setText(nextDate);
-        Log.v("Date",nextDate);
+        Log.v("Date", nextDate);
+        //}
 
     }
 

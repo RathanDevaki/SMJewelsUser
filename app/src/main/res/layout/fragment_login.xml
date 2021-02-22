@@ -89,20 +89,20 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Not having an account?"
+                        android:text="Not having an account? Please contact our store."
                         android:textSize="11sp"
                         android:id="@+id/no_account"
                         android:fontFamily="@font/montserrat_medium"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Create Now!"
-                        android:layout_marginStart="8dp"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="14sp"
-                        android:fontFamily="@font/montserrat_bold"
-                        android:id="@+id/createAccount"/>
+                    <!--    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Create Now!"
+                            android:layout_marginStart="8dp"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:id="@+id/createAccount"/> -->
 
                 </LinearLayout>
 

@@ -2,6 +2,8 @@ package in.savitar.smjewelsuser.mvp.utils;
 
 import android.annotation.SuppressLint;
 
+import java.lang.ref.WeakReference;
+
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,16 +11,12 @@ import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
-import java.lang.ref.WeakReference;
-
 import in.savitar.smjewelsuser.databinding.ActivityMainBinding;
-import in.savitar.smjewelsuser.databinding.ActivitySplashBinding;
 import in.savitar.smjewelsuser.mvp.ui.Dashboard.DashboardFragment;
 import in.savitar.smjewelsuser.mvp.ui.Dashboard.PlanWinnersFragment;
 import in.savitar.smjewelsuser.mvp.ui.Dashboard.UserProfileFragment;
 import in.savitar.smjewelsuser.mvp.ui.PlanB.PlanBFragment;
-import in.savitar.smjewelsuser.mvp.ui.splash.SplashFragment;
+import in.savitar.smjewelsuser.mvp.ui.PlanC.PlanCFragment;
 
 public enum NavigationUtilMain {
 
@@ -69,20 +67,23 @@ public enum NavigationUtilMain {
     }
 
     public void setUpDashboard() {
-        addFragment(new DashboardFragment(), DashboardFragment.class.getSimpleName(),false);
+        addFragment(new DashboardFragment(), DashboardFragment.class.getSimpleName(), false);
     }
 
     public void toPlanB() {
-        addFragment(new PlanBFragment(), PlanBFragment.class.getSimpleName(),false);
+        addFragment(new PlanBFragment(), PlanBFragment.class.getSimpleName(), false);
     }
 
+    public void toPlanC() {
+        addFragment(new PlanCFragment(), PlanCFragment.class.getSimpleName(), false);
+    }
 
     public void toUserProfile() {
-        addFragment(new UserProfileFragment(), UserProfileFragment.class.getSimpleName(),true);
+        addFragment(new UserProfileFragment(), UserProfileFragment.class.getSimpleName(), true);
     }
 
     public void toPlanWinners() {
-        addFragment(new PlanWinnersFragment(), PlanWinnersFragment.class.getSimpleName(),true);
+        addFragment(new PlanWinnersFragment(), PlanWinnersFragment.class.getSimpleName(), true);
     }
 
 }

@@ -128,12 +128,12 @@ public class LoginFragment extends Fragment implements SplashContract.View {
         displayImageSlider();
 
         //Create Account
-        mBinding.createAccount.setOnClickListener(new View.OnClickListener() {
+      /*  mBinding.createAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 NavigationUtil.INSTANCE.toCreateAccount();
             }
-        });
+        });*/
 
 
     }
@@ -153,14 +153,14 @@ public class LoginFragment extends Fragment implements SplashContract.View {
         mBinding.progressBar.setVisibility(View.VISIBLE);
         mBinding.getOtp.setVisibility(View.GONE);
         mBinding.noAccount.setVisibility(View.GONE);
-        mBinding.createAccount.setVisibility(View.GONE);
+        // mBinding.createAccount.setVisibility(View.GONE);
     }
     public void progress_hidden()
     {
         mBinding.progressBar.setVisibility(View.GONE);
         mBinding.getOtp.setVisibility(View.VISIBLE);
         mBinding.noAccount.setVisibility(View.VISIBLE);
-        mBinding.createAccount.setVisibility(View.VISIBLE);
+        // mBinding.createAccount.setVisibility(View.VISIBLE);
     }
     public void getPhoneNumber(final String userID) {
         progress_visiblity();

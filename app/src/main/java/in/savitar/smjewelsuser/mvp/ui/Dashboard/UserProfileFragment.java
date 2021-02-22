@@ -4,15 +4,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
@@ -23,6 +17,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import net.glxn.qrgen.android.QRCode;
 
+import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
 import in.savitar.smjewelsuser.R;
 import in.savitar.smjewelsuser.databinding.FragmentUserProfileBinding;
 
@@ -109,8 +106,26 @@ public class UserProfileFragment extends Fragment  implements DashboardContract.
 
         }
       });
-    }
+    } else if (preferences.getString("Plan", "").compareToIgnoreCase("PlanC") == 0) {
+      databaseReference.child(preferences.getString("Plan", "")).child("UsersList")
+              .child(preferences.getString("UserKey", "")).addListenerForSingleValueEvent(new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot snapshot) {
+          mBinding.userIdProfile.setText(snapshot.child("ID").getValue(String.class));
+          mBinding.userNameProfile.setText(snapshot.child("Name").getValue(String.class));
+          Glide
+                  .with(getContext())
+                  .load(snapshot.child("ProfilePhoto").getValue(String.class))
+                  .into(mBinding.userPhotoProfile);
+          generateQRCode(snapshot.child("ID").getValue(String.class).toString());
+        }
 
+        @Override
+        public void onCancelled(@NonNull DatabaseError error) {
+
+        }
+      });
+    }
 
 
   }
