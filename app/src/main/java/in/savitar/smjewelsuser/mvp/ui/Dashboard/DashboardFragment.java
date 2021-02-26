@@ -147,18 +147,6 @@ public class DashboardFragment extends Fragment implements DashboardContract.Vie
             }
         });
 
-//        HashMap<String,String> drawMap = new HashMap<>();
-//        drawMap.put("Winner1","Shrivathsa J V");
-//        drawMap.put("Winner2","Nagraj Patake");
-//        drawMap.put("Month","August 2020");
-//        drawMap.put("UserID1","202008002");
-//        drawMap.put("UserID2","202008003");
-//        drawMap.put("Photo1","https://firebasestorage.googleapis.com/v0/b/sm-jewels.appspot.com/o/ProfilePictures%2FD8dDZukXUAAXLdY.jpg?alt=media&token=8e289afe-4fdf-4e04-b39d-b96b4ac0ad6a");
-//        drawMap.put("Photo2","https://firebasestorage.googleapis.com/v0/b/sm-jewels.appspot.com/o/ProfilePictures%2FD8dDZukXUAAXLdY.jpg?alt=media&token=8e289afe-4fdf-4e04-b39d-b96b4ac0ad6a");
-//
-//        String pushKey = databaseReference.push().getKey();
-//
-//        databaseReference.child(pushKey).setValue(drawMap);
     }
 
     private void showPaymentSummaryDialog(int i) {
@@ -271,8 +259,6 @@ public class DashboardFragment extends Fragment implements DashboardContract.Vie
 
                         if (snapshot.hasChild("LastPaidMonth")){
 
-                          // lpm=snapshot.child("LastPaidMonth").getValue(String.class);
-
                             getNextPayingDate(snapshot.child("LastPaidMonth").getValue(String.class), snapshot.child("TotalTransactions").getValue(Long.class));
                         }
                     }
@@ -349,18 +335,8 @@ public class DashboardFragment extends Fragment implements DashboardContract.Vie
         }
         String nextDate = intdate + "/" + intmonth + "/" + intyear;
 
-       /*String[] _lpm=lpm.split("/");
-       if(_lpm[1] == _month)
-       {
-           mBinding.upcomingPaymentDate.setText("-");
-       }*/
-      /*  if(totTrans==0){
-            mBinding.upcomingPaymentDate.setText("-");
-        }
-        else {(*/
         mBinding.upcomingPaymentDate.setText(nextDate);
         Log.v("Date", nextDate);
-        //}
 
     }
 
