@@ -23,15 +23,6 @@
                     android:orientation="vertical"
                     android:padding="16dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_bold"
-                        android:text="Your Plan"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="16sp" />
-
-
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="170dp"
@@ -260,12 +251,15 @@
 
 
                     </FrameLayout>
+
+
                     <LinearLayout
                         android:id="@+id/complete_layout"
-                        android:visibility="gone"
+                        android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical">
+                        android:visibility="gone">
+
                         <TextView
 
                             android:id="@+id/complete_text"
@@ -282,6 +276,7 @@
                             android:visibility="gone">
 
                         </TextView>
+
                         <pl.droidsonroids.gif.GifImageView
                             android:id="@+id/complete_animation"
                             android:layout_height="240dp"
@@ -292,13 +287,13 @@
 
                             />
                     </LinearLayout>
-                    <!-- Complete gif layout -->
+
                     <LinearLayout
                         android:id="@+id/loading_layout"
-                        android:visibility="visible"
+                        android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical">
+                        android:visibility="visible">
 
                         <pl.droidsonroids.gif.GifImageView
                             android:layout_height="240dp"
@@ -307,24 +302,7 @@
                             android:src="@drawable/loading"
                             app:placeholder="@drawable/loading" />
                     </LinearLayout>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
-                        android:fontFamily="@font/montserrat_bold"
-                        android:text="Your Transactions"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
-                        android:fontFamily="@font/montserrat_bold"
-                        android:text="Monthly Draw Winner"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="16sp" />
-
+                    <!-- Complete gif layout -->
                     <TextView
                         android:textSize="16sp"
                         android:id="@+id/summary_text"
@@ -335,6 +313,15 @@
                         android:text="Account Summary"
                         android:textColor="@color/colorBlack"
                         android:visibility="gone" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="Your Transactions"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp" />
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/card_view"
@@ -568,6 +555,23 @@
 
                     </androidx.cardview.widget.CardView>
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="Monthly Draw Winner"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="Your Plan"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp" />
+
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -677,6 +681,7 @@
                         android:scrollbars="none" />
 
 
+
                 </LinearLayout>
 
 
@@ -707,16 +712,9 @@
                        android:id="@+id/user_photo_dashboard" -->
 
                     <LinearLayout
-                        android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/user_photo_dashboard"
-                            android:layout_width="160dp"
-                            android:layout_height="132dp"
-                            android:layout_marginTop="32dp"
-                            android:layout_gravity="center" />
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/user_name_dashboard"
@@ -740,6 +738,13 @@
                             android:text="Loading..."
                             android:textColor="@color/colorWhite"
                             android:textSize="16sp" />
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/user_photo_dashboard"
+                            android:layout_width="160dp"
+                            android:layout_height="132dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="32dp" />
 
 
                         <!--      <TextView
