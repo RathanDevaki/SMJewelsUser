@@ -143,7 +143,7 @@ public class PlanCFragment extends DialogFragment implements DashboardContract.V
                     if (snapshot.hasChild("InstallmentAmount")) {
                         instPeriod = snapshot.child("InstallmentAmount").getValue(Integer.class);
                         if (instPeriod == 0) {
-                            mBinding.summaryText.setVisibility(View.GONE);
+                           mBinding.summaryText.setVisibility(View.GONE);
                             mBinding.cardView.setVisibility(View.GONE);
                             mBinding.loadingLayout.setVisibility(View.GONE);
                             mBinding.transactionsList.setVisibility(View.GONE);
@@ -171,12 +171,10 @@ public class PlanCFragment extends DialogFragment implements DashboardContract.V
                                         Toasty.success(getContext(), pl + " Plan has selected", Toasty.LENGTH_LONG).show();
                                         dataflag = 1;
                                         mBinding.spinnerLayout.setVisibility(View.GONE);
-
                                         mBinding.cardView.setVisibility(View.VISIBLE);
                                         mBinding.yourPlan.setVisibility(View.VISIBLE);
                                         mBinding.progressLayout.setVisibility(View.VISIBLE);
                                         mBinding.transactionsList.setVisibility(View.VISIBLE);
-                                        //mBinding.spinnerLayout.setVisibility(View.GONE);
                                         mBinding.progressBar.setVisibility(View.GONE);
                                         mBinding.btnAddInstallment.setVisibility(View.VISIBLE);
 
@@ -195,18 +193,18 @@ public class PlanCFragment extends DialogFragment implements DashboardContract.V
 
                     if (flag == 1) {
 
-                        mBinding.yourPlan.setVisibility(View.VISIBLE);
+                       mBinding.yourPlan.setVisibility(View.VISIBLE);
                         mBinding.yourTransaction.setVisibility(View.VISIBLE);
                         mBinding.progressLayout.setVisibility(View.VISIBLE);
                         mBinding.summaryText.setVisibility(View.VISIBLE);
 
                         mBinding.planNameProgress.setText(planName);
                         mBinding.cardView.setVisibility(View.GONE);
-                        //  mBinding.summaryText.setVisibility(View.GONE);
+                          mBinding.summaryText.setVisibility(View.GONE);
                         if (snapshot.hasChild("InstallmentPeriod")) {
                             long totalMonths = snapshot.child("InstallmentPeriod").getValue(Long.class);
                             mBinding.cardView.setVisibility(View.VISIBLE);
-                            // mBinding.summaryText.setVisibility(View.VISIBLE);
+                             mBinding.summaryText.setVisibility(View.VISIBLE);
                             long completedMonths = snapshot.child("CompletedMonths").getValue(Long.class);
                             long percentageCompleted = (completedMonths * 100) / totalMonths;
                             long totalAmount = snapshot.child("TotalAmount").getValue(Long.class);
@@ -217,7 +215,7 @@ public class PlanCFragment extends DialogFragment implements DashboardContract.V
                                 mBinding.completeLayout.setVisibility(View.VISIBLE);
                                 mBinding.completeText.setText("Your plan has been completed.\n \n Your total savings is Rs." + netAmount + "/-");
                                 mBinding.cardView.setVisibility(View.VISIBLE);
-                                //    mBinding.summaryText.setVisibility(View.GONE);
+                                mBinding.summaryText.setVisibility(View.GONE);
                                 new Handler().postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
@@ -230,7 +228,7 @@ public class PlanCFragment extends DialogFragment implements DashboardContract.V
                                 mBinding.loadingLayout.setVisibility(View.GONE);
                                 mBinding.completeLayout.setVisibility(View.GONE);
                                 mBinding.cardView.setVisibility(View.VISIBLE);
-                                //  mBinding.summaryText.setVisibility(View.VISIBLE);
+                                  mBinding.summaryText.setVisibility(View.VISIBLE);
                             }
 
                             mBinding.progressPercentage.setText(String.valueOf(_completedPercentage) + "% Completed");
